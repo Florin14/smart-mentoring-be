@@ -120,7 +120,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
                 .user(AnnouncementUserResponseDTO.builder()
                         .id(announcement.getUser().getId())
                         .fullName(announcement.getUser().getFullName())
-                        .profilePicture(avatar)
+//                        .profilePicture(avatar)
                         .build())
                 .title(announcement.getTitle())
                 .price(announcement.getPrice())

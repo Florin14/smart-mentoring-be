@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Objects;
-
 
 @Data
 @Builder
@@ -17,23 +14,20 @@ import java.util.Objects;
 @NoArgsConstructor
 @Entity(name = "messages")
 public class Message {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sender_id")
     private User sender;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "receiver_id")
     private User receiver;
-
 
     private String content;
 
-
-    private Date time;
-
-
+    private LocalDateTime timestamp;
 }

@@ -7,6 +7,7 @@ import ro.ubb.mp.controller.dto.request.MessageRequestDTO;
 import ro.ubb.mp.dao.model.Message;
 import ro.ubb.mp.dao.model.User;
 import ro.ubb.mp.dao.repository.MessageRepository;
+import ro.ubb.mp.dao.repository.UserRepository;
 import ro.ubb.mp.service.user.UserService;
 
 import javax.persistence.EntityNotFoundException;
@@ -39,7 +40,7 @@ public class MessageServiceImpl implements MessageService {
         final Message messageToBeSaved = Message.builder()
                 .content(messageDTO.getContent())
                 .receiver(receiver)
-                .time(Timestamp.from(Instant.now()))
+                .timestamp(Timestamp.from(Instant.now()).toLocalDateTime())
                 .sender(sender)
                 .build();
 
@@ -58,7 +59,7 @@ public class MessageServiceImpl implements MessageService {
 
         return Stream.concat(messageRepository.findBySenderAndReceiver(user1, user2).stream(),
                         messageRepository.findBySenderAndReceiver(user2, user1).stream())
-                .sorted(Comparator.comparing(Message::getTime)).collect(Collectors.toList());
+                .sorted(Comparator.comparing(Message::getTimestamp)).collect(Collectors.toList());
     }
 
     @Override
@@ -67,7 +68,13 @@ public class MessageServiceImpl implements MessageService {
 
         return Stream.concat(messageRepository.findBySender(user).stream(),
                         messageRepository.findByReceiver(user).stream())
-                .sorted(Comparator.comparing(Message::getTime)).collect(Collectors.toList());
+                .sorted(Comparator.comparing(Message::getTimestamp)).collect(Collectors.toList());
+    }
+
+    @Override
+    public User findUserById(Long id) {
+        return userService.getUserById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 }
 

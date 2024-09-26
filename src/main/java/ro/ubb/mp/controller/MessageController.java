@@ -83,7 +83,7 @@ public class MessageController {
                 .body(ResponseWrapperDTO.<List<MessageResponseDTO>>builder().error("Bad authentication type").build());
     }
 
-    @GetMapping("user/{id}")
+    @GetMapping("/user/{id}")
     public ResponseEntity<ResponseWrapperDTO<List<MessageResponseDTO>>> getAllUserMessages(@PathVariable Long id){
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof User user){
             List<MessageResponseDTO> messageResponseDTOS = getMessageService().getAllUserMessages(id)

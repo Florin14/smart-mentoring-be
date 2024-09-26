@@ -20,7 +20,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws")
-                .setAllowedOrigins("http://localhost:3000", "http://localhost:8080") // Allow localhost access
+                .setAllowedOrigins("*") // Allow localhost access
                 .withSockJS();  // Fallback for browsers that don't support native WebSocket
     }
 }

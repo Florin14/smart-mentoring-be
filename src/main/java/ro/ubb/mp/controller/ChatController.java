@@ -26,7 +26,7 @@ public class ChatController {
 
     // Sending message to a public chat room
     @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public")
+    @SendTo("/topic/messages")
     public Message sendPublicMessage(MessageRequestDTO message) {
         message.setTimestamp(LocalDateTime.now());
         return messageService.saveMessage(message);

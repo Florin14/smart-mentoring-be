@@ -25,22 +25,22 @@ public class ChatController {
     }
 
     // Sending message to a public chat room
-    @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/messages")
-    public Message sendPublicMessage(MessageRequestDTO message) {
-        message.setTimestamp(LocalDateTime.now());
-        return messageService.saveMessage(message);
-    }
-
-    // Sending a private message to a specific user
-    @MessageMapping("/chat.privateMessage/{receiverId}")
-    public void sendPrivateMessage(MessageRequestDTO message, @PathVariable Long receiverId) {
-        message.setTimestamp(LocalDateTime.now());
-        User receiver = messageService.findUserById(receiverId);
-        messageService.saveMessage(message);
-
-
-        // Send private message only to the intended user
-        messagingTemplate.convertAndSendToUser(receiver.getUsername(), "/queue/private", message);
-    }
+//    @MessageMapping("/chat.sendMessage")
+//    @SendTo("/topic/messages")
+//    public Message sendPublicMessage(MessageRequestDTO message) {
+//        message.setTimestamp(LocalDateTime.now());
+//        return messageService.saveMessage(message);
+//    }
+//
+//    // Sending a private message to a specific user
+//    @MessageMapping("/chat.privateMessage/{receiverId}")
+//    public void sendPrivateMessage(MessageRequestDTO message, @PathVariable Long receiverId) {
+//        message.setTimestamp(LocalDateTime.now());
+//        User receiver = messageService.findUserById(receiverId);
+//        messageService.saveMessage(message);
+//
+//
+//        // Send private message only to the intended user
+//        messagingTemplate.convertAndSendToUser(receiver.getUsername(), "/queue/private", message);
+//    }
 }

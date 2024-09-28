@@ -19,6 +19,8 @@ import ro.ubb.mp.dao.repository.AppointmentRepository;
 import ro.ubb.mp.service.user.UserService;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -45,7 +47,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         final Appointment appointmentToBeSaved = Appointment.builder()
                 .student(student)
                 .mentor(mentor)
-                .date(appointmentRequestDTO.getDate())
+                .date(LocalDateTime.parse(appointmentRequestDTO.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
                 .locationDetails(appointmentRequestDTO.getLocationDetails())
                 .build();
 
@@ -76,7 +78,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
 
         if (appointmentRequestDTO.getDate() != null) {
-            appointment.setDate(appointmentRequestDTO.getDate());
+            appointment.setDate(LocalDateTime.parse(appointmentRequestDTO.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         }
 
         return repository.save(appointment);

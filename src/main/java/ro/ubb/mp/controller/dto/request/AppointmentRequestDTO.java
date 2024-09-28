@@ -15,7 +15,7 @@ public class AppointmentRequestDTO {
     private Long studentId;
     private Long mentorId;
     @NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:[.ss][.SSS][.SS][.S]")
-    private LocalDateTime date;
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:[.ss][.SSS][.SS][.S]")
+    private String date;
     private String locationDetails;
 }

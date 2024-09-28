@@ -15,7 +15,7 @@ public class AppointmentResponseDTO {
     private Long id;
     private UserFullNameDTO student;
     private UserFullNameDTO mentor;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:[.ss][.SSS][.SS][.S]")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime date;
     private String locationDetails;
 }

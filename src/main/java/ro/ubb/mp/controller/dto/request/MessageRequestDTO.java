@@ -17,6 +17,6 @@ public class MessageRequestDTO {
     private Long receiverId;
     private String content;
     @NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss[.SSS][.SS][.S]")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime timestamp;
 }

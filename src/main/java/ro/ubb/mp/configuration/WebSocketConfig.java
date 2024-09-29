@@ -13,13 +13,15 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         // Enable a simple broker for broadcasting messages (topics)
-        config.enableSimpleBroker("/topic", "/queue");  // Topic for public messages, queue for private
+        config.enableSimpleBroker("/chatroom", "/user");  // Topic for public messages, queue for private
         config.setApplicationDestinationPrefixes("/app");  // Prefix for sending messages from client to server
+        config.setUserDestinationPrefix("/user");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws")
+                .addInterceptors(new WebSocketAuthInterceptor())
                 .setAllowedOrigins("*") // Allow localhost access
                 .withSockJS();  // Fallback for browsers that don't support native WebSocket
     }

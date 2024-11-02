@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final StudyRepository studyRepository;
     private final InterestAreaRepository interestAreaRepository;
-    private final AppointmentRepository appointmentRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserProfileRequestMapper userProfileUpdateMapper;
     private final UserProfilePictureRepository userProfilePictureRepository;
@@ -145,12 +144,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAllByRole(Role.MENTOR);
     }
 
-    @Override
-    public List<User> findAllAnnouncementsUsersByMentor(User mentor) {
-
-        List<Long> studentsId = getAppointmentRepository().findAllStudentsByMentorId(mentor.getId());
-        return getUserRepository().findAllById(studentsId);
-    }
     @Override
     public Optional<UserProfilePicture> findUserProfilePicture(Long userId) {
         return userProfilePictureRepository.findProfilePictureByUserId(userId);

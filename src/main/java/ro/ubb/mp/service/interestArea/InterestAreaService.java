@@ -1,7 +1,6 @@
 package ro.ubb.mp.service.interestArea;
 
 import ro.ubb.mp.controller.dto.request.InterestAreaRequestDTO;
-import ro.ubb.mp.dao.model.Assignment;
 import ro.ubb.mp.dao.model.InterestArea;
 
 import java.util.List;

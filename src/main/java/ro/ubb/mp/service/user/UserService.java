@@ -26,7 +26,6 @@ public interface UserService extends UserDetailsService {
 
     User updateProfile(ProfileRequestDTO profileRequestDTO);
 
-    List<User> findAllAnnouncementsUsersByMentor(User mentor);
 
     Optional<UserProfilePicture> findUserProfilePicture(Long userId);
 

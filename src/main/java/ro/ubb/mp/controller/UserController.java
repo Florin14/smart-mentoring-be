@@ -42,7 +42,6 @@ public class UserController {
      * (403 Forbidden => Means we are lacking the necessary authorities(ROLES) to access the given resource
      */
     @GetMapping("/users")
-    @PreAuthorize("hasAnyAuthority('MENTOR')")
     public ResponseEntity<List<User>> getUsers() {
         return ResponseEntity.ok().body(userService.getAll());
     }
@@ -192,31 +191,6 @@ public class UserController {
                 .badRequest()
                 .body(ResponseWrapperDTO
                         .<UserProfilePictureResponseDTO>builder()
-                        .error("Wrong authentication type")
-                        .build()
-                );
-    }
-
-    @PreAuthorize("hasAnyAuthority('MENTOR')")
-    @GetMapping("/mentors/appointments/students")
-    public ResponseEntity<ResponseWrapperDTO<List<UserProfileDTO>>> getAppointmentsUsersByMentor(final Authentication authentication) throws IOException {
-
-        if (authentication.getPrincipal() instanceof User mentor) {
-
-            List<User> appointmentsStudents = getUserService().findAllAnnouncementsUsersByMentor(mentor);
-
-            return ResponseEntity
-                    .ok(ResponseWrapperDTO
-                            .<List<UserProfileDTO>>builder()
-                            .data(appointmentsStudents.stream().map(student -> getUserMapper().toProfileDTO(student)).toList())
-                            .build());
-
-        }
-
-        return ResponseEntity
-                .badRequest()
-                .body(ResponseWrapperDTO
-                        .<List<UserProfileDTO>>builder()
                         .error("Wrong authentication type")
                         .build()
                 );

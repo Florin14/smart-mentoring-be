@@ -13,6 +13,7 @@ public interface UserService extends UserDetailsService {
 
     List<User> getAll();
     List<User> getAllMentors();
+    List<User> getAllStudents();
 
     Optional<User> getUserById(Long id);
 

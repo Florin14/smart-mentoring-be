@@ -145,12 +145,18 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAllByRole(Role.MENTOR);
     }
 
+    public List<User> getAllStudents() {
+        return userRepository.findAllByRole(Role.STUDENT);
+    }
+
+
     @Override
     public List<User> findAllAnnouncementsUsersByMentor(User mentor) {
 
         List<Long> studentsId = getAppointmentRepository().findAllStudentsByMentorId(mentor.getId());
         return getUserRepository().findAllById(studentsId);
     }
+
     @Override
     public Optional<UserProfilePicture> findUserProfilePicture(Long userId) {
         return userProfilePictureRepository.findProfilePictureByUserId(userId);
